@@ -2,7 +2,6 @@
 
 # Function to install OpenVPN
 install_vpn() {
-    pkg install screen -y
     pkg update && pkg upgrade -y # Update and upgrade Termux packages
     
     pkg install openvpn easy-rsa -y # Install OpenVPN and Easy-RSA
@@ -47,7 +46,7 @@ install_vpn() {
 EOF
     echo "Starting OpenVPN server..."   # Start the OpenVPN server
     openvpn --config /etc/openvpn/server.conf --daemon
-
+    pkg install screen -y
 echo "VPN setup completed. Please check the logs for any issues."
 echo "Please re-run"
 exit
@@ -89,7 +88,7 @@ while true; do
     case $choice in
         1)
             echo "Installing VPN..."
-            
+            install_vpn
             ;;
         2)
             echo "Starting VPN..."
